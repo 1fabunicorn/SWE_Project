@@ -1,17 +1,14 @@
 import scrapy
 from scrapy_splash import SplashRequest
 from w3lib.http import basic_auth_header
-from dotenv import load_dotenv
 import os
 
 class ShopifyMollySpider(scrapy.Spider):
     name = 'shopify_molly'
     allowed_domains = ['www.mollyjogger.com']
 
-    urls = [
-        'https://www.mollyjogger.com/collections/inventory',
-    ]
-    load_dotenv()
+
+    urls = ['https://www.mollyjogger.com/collections/inventory']
     def start_requests(self):
         for url in self.urls:
             #yield scrapy.Request(url=url, callback=self.parse)
