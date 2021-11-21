@@ -6,9 +6,19 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+from shutil import which
 from dotenv import load_dotenv
+import os
+load_dotenv(".env")
 
-load_dotenv("../.env")
+SELENIUM_DRIVER_NAME = 'firefox'
+#SELENIUM_DRIVER_EXECUTABLE_PATH = which('geckodriver')
+H_USER = os.getenv('HUB_USER')
+H_PASS = os.getenv('HUB_PASSWORD')
+print(H_USER)
+print(H_PASS)
+SELENIUM_COMMAND_EXECUTOR = 'http://{}:{}@45.79.131.228:4444'.format(H_USER, H_PASS)
+SELENIUM_DRIVER_ARGUMENTS=['-headless']  # '--headless' if using chrome instead of firefox
 BOT_NAME = 'SWE_Project'
 
 SPIDER_MODULES = ['SWE_Project.spiders']
@@ -58,6 +68,7 @@ DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 DOWNLOADER_MIDDLEWARES = {
     'scrapy_splash.SplashCookiesMiddleware': 723,
     'scrapy_splash.SplashMiddleware': 725,
+    'scrapy_selenium.SeleniumMiddleware': 800,
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 SPLASH_URL = 'https://xvd9vz4b-splash.scrapinghub.com/'
