@@ -10,7 +10,7 @@ from shutil import which
 from dotenv import load_dotenv
 import os
 load_dotenv(".env")
-
+g
 SELENIUM_DRIVER_NAME = 'firefox'
 #SELENIUM_DRIVER_EXECUTABLE_PATH = which('geckodriver')
 H_USER = os.getenv('HUB_USER')
@@ -18,7 +18,8 @@ H_PASS = os.getenv('HUB_PASSWORD')
 print(H_USER)
 print(H_PASS)
 SELENIUM_COMMAND_EXECUTOR = 'http://{}:{}@45.79.131.228:4444'.format(H_USER, H_PASS)
-SELENIUM_DRIVER_ARGUMENTS=['-headless']  # '--headless' if using chrome instead of firefox
+SELENIUM_DRIVER_ARGUMENTS=[]
+#SELENIUM_DRIVER_ARGUMENTS=['-headless']  # '--headless' if using chrome instead of firefox
 BOT_NAME = 'SWE_Project'
 
 SPIDER_MODULES = ['SWE_Project.spiders']
@@ -80,9 +81,9 @@ SPLASH_URL = 'https://xvd9vz4b-splash.scrapinghub.com/'
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'SWE_Project.pipelines.SweProjectPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'SWE_Project.pipelines.SweProjectPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

@@ -5,9 +5,28 @@
 
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+from src.ClassEnumeration import ClassEnumeration
 
 
 class SweProjectPipeline:
+    enumeration = ClassEnumeration()
+
+    def open_spider(self, spider):
+        self.file = open('items.txt', 'w')
+
+    def close_spider(self, spider):
+        self.file.close()
+
+    def process_enumerating_spider(self, item):
+        # an item is a single line representing text under the targeted classes. We need to clean
+        s = item.strip()
+        self.file.write(s)
+        self.file.write("\n")
+        return s
+
     def process_item(self, item, spider):
-        return item
+        if spider.name == 'default':
+            for r in item['results']:  # different css selections from the class enumeration
+                self.process_enumerating_spider(r)
+        else:
+            return item
