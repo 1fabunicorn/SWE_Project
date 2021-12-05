@@ -27,7 +27,8 @@ class EnnumeratingSpider(scrapy.Spider):
     def parse(self, response):
         count = 0
         yield {
-            "results": self.enumeration.get(response)
+            "url": response.url,
+            "results": self.enumeration.get(response.css("main"))
         }
         # for item in response.css(".product-collection__content"):
         #     count += 1

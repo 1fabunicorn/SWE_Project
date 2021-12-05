@@ -17,15 +17,7 @@ class SweProjectPipeline:
     def close_spider(self, spider):
         self.file.close()
 
-    def process_enumerating_spider(self, item):
-        # an item is a single line representing text under the targeted classes. We need to clean
-        s = item.strip()
-        self.file.write(s)
-        self.file.write("\n")
-        return s
-
     def process_item(self, item, spider):
         if spider.name == 'default':
-            for r in item['results']:  # different css selections from the class enumeration
-                item["results"] = self.process_enumerating_spider(r)
+            pass
         return item

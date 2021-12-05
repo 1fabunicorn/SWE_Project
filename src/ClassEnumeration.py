@@ -1,3 +1,5 @@
+import re
+
 class_chunks = ["money", "title", "grid", "item", "product", "card", "block", "wrap", "wrapper", "reg", "price", "name",
                 "pricing", "pricing", "details" "collection__title", "product__price"]
 class_seps = ['-', '_', '__', '--']
@@ -21,11 +23,14 @@ class ClassEnumeration():
         f = []
         for class_combo in self.classes:
             r = response.css("." + class_combo + " ::text").getall()
-            if r:
-                for selection in r:
-                    s = selection.strip()
-                    if s:
-                        t.append(s)
+            for rstr in r:
+                matches = re.search("\$\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})", rstr)
+                for match in matches:
+                    t.append(match)
+                # for selection in r:
+                #     s = selection.strip()
+                #     if s:
+                #         t.append(s)
                 # t.append({class_combo:r})
         return t
 
