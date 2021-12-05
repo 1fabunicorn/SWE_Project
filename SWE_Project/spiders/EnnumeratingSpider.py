@@ -12,12 +12,12 @@ class EnnumeratingSpider(scrapy.Spider):
 
     enumeration = ClassEnumeration()
 
-    urls = ["https://partakefoods.com", "https://uppercasemagazine.com", "https://hiutdenim.co.uk",
-            "https://www.manitobah.com", "https://packagefreeshop.com", "https://flourist.com",
-             "https://www.allbirds.com", "https://www.naja.co", "https://unitedbyblue.com", "https://bailly.co",
-             "https://www.givemetap.com", "https://www.silkandwillow.com", "https://www.tazachocolate.com", "https://www.smartypits.com",
-            "https://www.makergear.com", "https://www.parklandmfg.ca", "https://www.thehoneypot.co", "https://www.goodfair.com", "https://www.lunchskins.com"]
-    # urls = ['https://www.deathwishcoffee.com/collections/coffee']
+    urls = [ "https://partakefoods.com", "https://uppercasemagazine.com", "https://www.smartypits.com",
+            "https://www.manitobah.com", "https://packagefreeshop.com", "https://flourist.com", "https://www.naja.co",
+            "https://unitedbyblue.com", "https://bailly.co", "https://www.lunchskins.com"
+            "https://www.givemetap.com", "https://www.silkandwillow.com", "https://www.tazachocolate.com",
+            "https://www.makergear.com", "https://www.parklandmfg.ca" ]
+    # urls = ["https://www.givemetap.com"]
 
     def start_requests(self):
         for url in self.urls:
@@ -28,7 +28,8 @@ class EnnumeratingSpider(scrapy.Spider):
         count = 0
         yield {
             "url": response.url,
-            "results": self.enumeration.get(response.css("main"))
+            "results": self.enumeration.get(response.css("main")),
+            "results_all" : self.enumeration.get(response)
         }
         # for item in response.css(".product-collection__content"):
         #     count += 1
