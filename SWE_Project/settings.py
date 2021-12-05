@@ -10,13 +10,10 @@ from shutil import which
 from dotenv import load_dotenv
 import os
 load_dotenv(".env")
-g
 SELENIUM_DRIVER_NAME = 'firefox'
 #SELENIUM_DRIVER_EXECUTABLE_PATH = which('geckodriver')
 H_USER = os.getenv('HUB_USER')
 H_PASS = os.getenv('HUB_PASSWORD')
-print(H_USER)
-print(H_PASS)
 SELENIUM_COMMAND_EXECUTOR = 'http://{}:{}@45.79.131.228:4444'.format(H_USER, H_PASS)
 SELENIUM_DRIVER_ARGUMENTS=[]
 #SELENIUM_DRIVER_ARGUMENTS=['-headless']  # '--headless' if using chrome instead of firefox
