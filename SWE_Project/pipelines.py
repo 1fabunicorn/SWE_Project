@@ -27,6 +27,5 @@ class SweProjectPipeline:
     def process_item(self, item, spider):
         if spider.name == 'default':
             for r in item['results']:  # different css selections from the class enumeration
-                self.process_enumerating_spider(r)
-        else:
-            return item
+                item["results"] = self.process_enumerating_spider(r)
+        return item
